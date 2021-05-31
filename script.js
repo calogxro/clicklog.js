@@ -85,24 +85,6 @@
         }
     }
 
-    /*
-    class LogTypes {
-        static types() {
-            var logTypes = localStorage.logs.split(',');
-            return logTypes;
-        }
-
-        static select(log_idx) {
-            var logTypes = LogTypes.types();
-            return logTypes[log_idx];
-        }
-    }*/
-
-    /*
-    function renderClickCount(clickcount, $el) {
-        $el.innerHTML = 'You have clicked the button ' + clickcount + ' time(s).';
-    }*/
-
     function renderLogs(logs, $el) {
         var html = '';
 
@@ -123,9 +105,6 @@
 
         var stats = Logger.dailyStats(logs);
 
-        //console.log(logs)
-        //console.log(stats);
-
         for (let date in stats) {
             //console.log(date); 
             html += '<tr>';
@@ -145,82 +124,34 @@
     }
 
     function log() {
-        /*
-        if (localStorage.clickcount) {
-            localStorage.clickcount = Number(localStorage.clickcount) + 1;
-        } 
-        else {
-            localStorage.clickcount = 1;
-        }
-        */
-
         Logger.log(_log, (logs) => {
             render({
                 'logs': logs,
-                //'clickcount': localStorage.clickcount
             });
         });
     }
 
-    function switchLogger(evt) {
-        //console.log(evt.target.value);
-        _log = evt.target.value;
-
-        $btnLog.innerHTML = evt.target.value.toUpperCase() + '!';
-
-        render();
-    }
-
-    function initRadio() {
-        //var logTypes = LogTypes.types();
-        //var html = '';
-        //logTypes.forEach((logType) => {});
-
-        $logType.innerHTML = ""+
-        "<input type=\"radio\" name=\"log\" value=\"log\" checked=\"checked\"> Log<br>" +
-        "<input type=\"radio\" name=\"log\" value=\"log_2\"> Log_2<br>";
-
-        $logType.addEventListener('change', switchLogger);
-    }
-    
     function init() {
         if(typeof(Storage) !== 'undefined') {
-            $logType = document.getElementById('logType');
             $btnLog = document.getElementById('btnLog');
-            //$clickCount = document.getElementById('clickCount');
             $logs = document.getElementById('logs');
             $stats = document.getElementById('stats');
 
             $btnLog.addEventListener('click', log);
 
-            //initRadio();
-
             render();
 
-            /*
-            render({
-                'logs': Logger.logs(_log),
-                //'clickcount': localStorage.clickcount
-            });*/
-
-            //JSONDate.test();
-            //ObjStorage.test();
         } else {
             alert('Sorry, your browser does not support web storage...');
         }
     }
 
     function _init() {
-        //localStorage.logs = ['log', 'log_2'];
-    
         _log = 'log'; //LogTypes.select(0);
         document.addEventListener('DOMContentLoaded', init, false);
     }
 
-
-    var $logType, $btnLog, /*$clickCount,*/ $logs, $stats;
-
-    var _log;
+    var $btnLog, $logs, $stats, _log;
 
     _init();
 
