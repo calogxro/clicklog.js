@@ -22,13 +22,13 @@ function render() {
   const stats = DateCounter.count(logs);
   renderLogs(logs, $logs);
   renderDailyStats(stats, $stats);
-  $copyText.value = JSON.stringify(localStorage);
+  $copyText.value = JSON.stringify(logs);
+  $saveText.value = "";
 }
 
 function log() {
-  logger.log(JSONDate.now(), () => {
-    render();
-  });
+  logger.log(JSONDate.now());
+  render();
 }
 
 function copyText() {
@@ -36,7 +36,12 @@ function copyText() {
   $copyText.setSelectionRange(0, 99999); // For mobile devices
   // Copy the text inside the text field 
   document.execCommand("copy");
-} 
+}
+
+function saveLogs() {
+  logger.import($saveText.value);
+  render();
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   if(typeof(Storage) !== 'undefined') {
@@ -46,9 +51,12 @@ document.addEventListener('DOMContentLoaded', () => {
     $logBtn = document.getElementById("logBtn");
     $copyBtn = document.getElementById("copyBtn");
     $copyText = document.getElementById("copyText");
+    $saveBtn = document.getElementById("saveBtn");
+    $saveText = document.getElementById("saveText");
     
     $logBtn.addEventListener('click', log);
     $copyBtn.addEventListener('click', copyText);
+    $saveBtn.addEventListener('click', saveLogs);
     
     render();
   } else {
@@ -56,4 +64,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 }, false);
 
-let logger, $logs, $stats, $logBtn, $copyBtn, $copyText;
+let logger, $logs, $stats, $logBtn, $copyBtn, $copyText, $saveBtn, $saveText;

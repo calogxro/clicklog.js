@@ -51,11 +51,15 @@ class Logger {
     return array && JSON.parse(array) || [];
   }
 
-  log(value, onUpdated = noop) {
+  log(value) { //, onUpdated = noop) {
     const logs = this.getLogs();
     logs.unshift(value); // prepend the value
     this.storage.setItem(this.id, JSON.stringify(logs));
-    onUpdated();
+    //onUpdated();
+  }
+
+  import(logs) {
+    this.storage.setItem(this.id, logs);
   }
 }
 

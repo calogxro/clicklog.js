@@ -1,3 +1,6 @@
+## 0.3 (2021-05-31)
+- Add a way to import logs
+
 ## 0.2.1 (2021-05-31)
 - Fix export string not updating on rendering
 
