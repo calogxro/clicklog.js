@@ -1,0 +1,19 @@
+{
+  "name": "clicklog",
+  "version": "",
+  "description": "",
+  "type": "module",
+  "main": "app.js",
+  "dependencies": {
+    "@types/mocha": "^8.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^15.6.1",
+    "mocha": "^8.4.0"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha test/**/test.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
