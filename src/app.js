@@ -21,7 +21,8 @@ function render() {
   const logs = logger.getLogs();
   const stats = DateCounter.count(logs);
   renderLogs(logs, $logs);
-  renderDailyStats(stats, $stats)
+  renderDailyStats(stats, $stats);
+  $copyText.value = JSON.stringify(localStorage);
 }
 
 function log() {
@@ -48,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     $logBtn.addEventListener('click', log);
     $copyBtn.addEventListener('click', copyText);
-    $copyText.value = JSON.stringify(localStorage);
     
     render();
   } else {
