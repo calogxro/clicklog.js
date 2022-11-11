@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@types/node": "^15.6.1",
-    "mocha": "^8.4.0"
+    "mocha": "^10.1.0"
   },
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha test/**/test.js"
